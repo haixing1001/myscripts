@@ -1,11 +1,11 @@
 /*
-Ğ¡³ÌĞò£ºÂóË¹Íş¶û¸£ÀûÉç
-×¥°üÓòÃûjde.mtbcpt.com
-²é¿´ÇëÇóÎÄ±¾openId
+å°ç¨‹åºï¼šéº¦æ–¯å¨å°”ç¦åˆ©ç¤¾
+æŠ“åŒ…åŸŸåjde.mtbcpt.com
+æŸ¥çœ‹è¯·æ±‚æ–‡æœ¬openId
 export mswlhd=''
-¶àºÅ@»ò»»ĞĞ
+å¤šå·@æˆ–æ¢è¡Œ
 */
-const $ = new Env('ÂóË¹Íş¶û¸£ÀûÉç');
+const $ = new Env('éº¦æ–¯å¨å°”ç¦åˆ©ç¤¾');
 const axios = require('axios');
 let request = require("request");
 request = request.defaults({
@@ -14,8 +14,8 @@ request = request.defaults({
 const {
     log
 } = console;
-const Notify = 1; //0Îª¹Ø±ÕÍ¨Öª£¬1Îª´ò¿ªÍ¨Öª,Ä¬ÈÏÎª1
-const debug = 0; //0Îª¹Ø±Õµ÷ÊÔ£¬1Îª´ò¿ªµ÷ÊÔ,Ä¬ÈÏÎª0
+const Notify = 1; //0ä¸ºå…³é—­é€šçŸ¥ï¼Œ1ä¸ºæ‰“å¼€é€šçŸ¥,é»˜è®¤ä¸º1
+const debug = 0; //0ä¸ºå…³é—­è°ƒè¯•ï¼Œ1ä¸ºæ‰“å¼€è°ƒè¯•,é»˜è®¤ä¸º0
 
 let mswlhd = ($.isNode() ? process.env.mswlhd : $.getdata("mswlhd")) || ""
 let mswlhdArr = [];
@@ -32,85 +32,85 @@ var timestamp = Math.round(new Date().getTime()).toString();
             return;
         else {
 
-            log(`\n\n=============================================    \n½Å±¾Ö´ĞĞ - ±±¾©Ê±¼ä(UTC+8)£º${new Date(
+            log(`\n\n=============================================    \nè„šæœ¬æ‰§è¡Œ - åŒ—äº¬æ—¶é—´(UTC+8)ï¼š${new Date(
                 new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 +
                 8 * 60 * 60 * 1000).toLocaleString()} \n=============================================\n`);
 
 
 
-            log(`\n============ Î¢ĞÅ¹«ÖÚºÅ£ºÄûÃÊÍæ»ú½»Á÷ ============`)
-            log(`\n=================== ¹²ÕÒµ½ ${mswlhdArr.length} ¸öÕËºÅ ===================`)
+            log(`\n============ å¾®ä¿¡å…¬ä¼—å·ï¼šæŸ æª¬ç©æœºäº¤æµ ============`)
+            log(`\n=================== å…±æ‰¾åˆ° ${mswlhdArr.length} ä¸ªè´¦å· ===================`)
             if (debug) {
-                log(`¡¾debug¡¿ ÕâÊÇÄãµÄÈ«²¿ÕËºÅÊı×é:\n ${mswlhdArr}`);
+                log(`ã€debugã€‘ è¿™æ˜¯ä½ çš„å…¨éƒ¨è´¦å·æ•°ç»„:\n ${mswlhdArr}`);
             }
             for (let index = 0; index < mswlhdArr.length; index++) {
 
                 let num = index + 1
-                addNotifyStr(`\n==== ¿ªÊ¼¡¾µÚ ${num} ¸öÕËºÅ¡¿====\n`, true)
+                addNotifyStr(`\n==== å¼€å§‹ã€ç¬¬ ${num} ä¸ªè´¦å·ã€‘====\n`, true)
 
                 mswlhd = mswlhdArr[index];            
                 
                 await req('GetUserFarmInitData',{"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res.data1)
                 canUseWaters = res.data1.canUseWaters
-                log("¿ÉÒÔ½½Ë®£º"+canUseWaters+'g')
+                log("å¯ä»¥æµ‡æ°´ï¼š"+canUseWaters+'g')
                 curCoffeeBeans = res.data1.curCoffeeBeans
-                log("¿ÉÒÔÊÕ»ñ¿§·È¶¹£º"+curCoffeeBeans+'g')
+                log("å¯ä»¥æ”¶è·å’–å•¡è±†ï¼š"+curCoffeeBeans+'g')
                 statusName = res.data.statusName
-                log('µ±Ç°×´Ì¬£º'+statusName+' ÒÑ½½Ë®£º'+res.data.userFarm.curWaters+'g')
+                log('å½“å‰çŠ¶æ€ï¼š'+statusName+' å·²æµ‡æ°´ï¼š'+res.data.userFarm.curWaters+'g')
                 lastWaters = res.data1.lastWaters
-                log("ÏÂÒ»½×¶Î»¹ĞèÒª£º"+lastWaters)
+                log("ä¸‹ä¸€é˜¶æ®µè¿˜éœ€è¦ï¼š"+lastWaters)
                 if(res.data1.isDisplayCheckGoods == 'N'){
                 productno = res.data.productno
                 await req('QueryStageGoods',{"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res.data)
-                log('ÒÑÑ¡Ôñ£º'+res.data.farmStage+"\n³ÉÊì»ñµÃ"+res.data.ProductType+'\nID: '+res.data.productno)
+                log('å·²é€‰æ‹©ï¼š'+res.data.farmStage+"\næˆç†Ÿè·å¾—"+res.data.ProductType+'\nID: '+res.data.productno)
                 productno = res.data.productno  
                 await req('SaveFarmGoods',{"productno":productno,"doNotRepeat":true,"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res)
                 log(res.msg) }
                 await req('UserSign',{"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res.state == true)
-                log('»ñµÃ£º'+res.data.addWaters)
+                log('è·å¾—ï¼š'+res.data.addWaters)
                 else
                 log(res.msg)                     
                 await req('UserShare',{"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res.state == true)
-                log('»ñµÃ£º'+res.data.addWaters)
+                log('è·å¾—ï¼š'+res.data.addWaters)
                 else
                 log(res.msg)
                 if(canUseWaters > 0)
                 for(let i=0;i<canUseWaters/20;i++){
                 await req('UserWatering',{"doNotRepeat":true,"through":true,"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res.state == true)
-                log('½½Ë®£º'+res.state) 
+                log('æµ‡æ°´ï¼š'+res.state) 
                 else
                 log(res.msg)                   
-                }else log('\nÃ»Ë®ÁË Ìø¹ı')
+                }else log('\næ²¡æ°´äº† è·³è¿‡')
                 await req('SignInDailyScore',{"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res.state == true)
-                log('Ç©µ½£º'+res.msg) 
+                log('ç­¾åˆ°ï¼š'+res.msg) 
                 else
                 log(res.msg)                
                 await req('ShareDailyScore',{"through":true,"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res.state == true)
-                log('Ç©µ½£º'+res.msg) 
+                log('ç­¾åˆ°ï¼š'+res.msg) 
                 else
                 log(res.msg)               
                 await req('GetBlindBoxHomeInfo',{"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res.state == true)
-                log('»ı·Ö£º'+res.data.curPoint) 
+                log('ç§¯åˆ†ï¼š'+res.data.curPoint) 
                 else
                 log(res.msg)                
                 await req('GetMemberTaskInfo',{"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res.state == true)
-                log('½ñÈÕÒÑ»ñµÃ»ı·Ö£º'+res.data.scanTotal)
+                log('ä»Šæ—¥å·²è·å¾—ç§¯åˆ†ï¼š'+res.data.scanTotal)
                 else
                 log(res.msg)                 
                 await req1('GetProductList',{"pageIndex":1,"pageSize":10,"doNotRepeat":true,"openId":mswlhd,"timestamp":timestamp,"sign":sign(mswlhd,timestamp)})
                 if(res.state == true)
                 for(let i=0;i<res.data.length;i++){
-                log(res.data[i].productName+' ¶Ò»»ĞèÒª»ı·Ö£º'+res.data[i].score)
+                log(res.data[i].productName+' å…‘æ¢éœ€è¦ç§¯åˆ†ï¼š'+res.data[i].score)
                 }
                 else
                 log(res.msg)                
@@ -149,14 +149,14 @@ var options = {
   data: bodys
 };
     if (debug) {
-            log(`\n¡¾debug¡¿=============== ÕâÊÇ  ÇëÇó url ===============`);
+            log(`\nã€debugã€‘=============== è¿™æ˜¯  è¯·æ±‚ url ===============`);
             log(JSON.stringify(options));
         }
         axios.request(options).then(async function(response) {
             try {
                  data = response.data;
                 if (debug) {
-                    log(`\n\n¡¾debug¡¿===============ÕâÊÇ ·µ»Ødata==============`);
+                    log(`\n\nã€debugã€‘===============è¿™æ˜¯ è¿”å›data==============`);
                     authcode = data.listdata.authcode
                 }
                 if (data.code == 0) {
@@ -167,12 +167,12 @@ var options = {
                     
                 
             } catch (e) {
-                log(`Òì³££º${data}£¬Ô­Òò£º${data.message}`)
+                log(`å¼‚å¸¸ï¼š${data}ï¼ŒåŸå› ï¼š${data.message}`)
             }
         }).catch(function(error) {
             console.error(error);
         }).then(res => {
-            //ÕâÀï´¦ÀíÕıÈ··µ»Ø
+            //è¿™é‡Œå¤„ç†æ­£ç¡®è¿”å›
             resolve();
         });
     })
@@ -201,14 +201,14 @@ var options = {
   data: bodys
 };
     if (debug) {
-            log(`\n¡¾debug¡¿=============== ÕâÊÇ  ÇëÇó url ===============`);
+            log(`\nã€debugã€‘=============== è¿™æ˜¯  è¯·æ±‚ url ===============`);
             log(JSON.stringify(options));
         }
         axios.request(options).then(async function(response) {
             try {
                  data = response.data;
                 if (debug) {
-                    log(`\n\n¡¾debug¡¿===============ÕâÊÇ ·µ»Ødata==============`);
+                    log(`\n\nã€debugã€‘===============è¿™æ˜¯ è¿”å›data==============`);
                     authcode = data.listdata.authcode
                 }
                 if (data.code == 0) {
@@ -219,12 +219,12 @@ var options = {
                     
                 
             } catch (e) {
-                log(`Òì³££º${data}£¬Ô­Òò£º${data.message}`)
+                log(`å¼‚å¸¸ï¼š${data}ï¼ŒåŸå› ï¼š${data.message}`)
             }
         }).catch(function(error) {
             console.error(error);
         }).then(res => {
-            //ÕâÀï´¦ÀíÕıÈ··µ»Ø
+            //è¿™é‡Œå¤„ç†æ­£ç¡®è¿”å›
             resolve();
         });
     })
@@ -245,7 +245,7 @@ async function Envs() {
             mswlhdArr.push(mswlhd);
         }
     } else {
-        log(`\n ¡¾${$.name}¡¿£ºÎ´ÌîĞ´±äÁ¿ mswlhd`)
+        log(`\n ã€${$.name}ã€‘ï¼šæœªå¡«å†™å˜é‡ mswlhd`)
         return;
     }
 
@@ -258,7 +258,7 @@ function addNotifyStr(str, is_log = true) {
     msg += `${str}\n`
 }
 
-// ============================================·¢ËÍÏûÏ¢============================================ \\
+// ============================================å‘é€æ¶ˆæ¯============================================ \\
 async function SendMsg(message) {
     if (!message)
         return;
@@ -386,7 +386,7 @@ function Env(t, e) {
 
     return new class {
         constructor(t, e) {
-            this.name = t, this.http = new s(this), this.data = null, this.dataFile = "box.dat", this.logs = [], this.isMute = !1, this.isNeedRewrite = !1, this.logSeparator = "\n", this.startTime = (new Date).getTime(), Object.assign(this, e), this.log("", `??${this.name}, ¿ªÊ¼!`)
+            this.name = t, this.http = new s(this), this.data = null, this.dataFile = "box.dat", this.logs = [], this.isMute = !1, this.isNeedRewrite = !1, this.logSeparator = "\n", this.startTime = (new Date).getTime(), Object.assign(this, e), this.log("", `??${this.name}, å¼€å§‹!`)
         }
 
         isNode() {
@@ -704,7 +704,7 @@ function Env(t, e) {
                 }
             };
             if (this.isMute || (this.isSurge() || this.isLoon() ? $notification.post(e, s, i, o(r)) : this.isQuanX() && $notify(e, s, i, o(r))), !this.isMuteLog) {
-                let t = ["", "==============??ÏµÍ³Í¨Öª??=============="];
+                let t = ["", "==============??ç³»ç»Ÿé€šçŸ¥??=============="];
                 t.push(e), s && t.push(s), i && t.push(i), console.log(t.join("\n")), this.logs = this.logs.concat(t)
             }
         }
@@ -715,7 +715,7 @@ function Env(t, e) {
 
         logErr(t, e) {
             const s = !this.isSurge() && !this.isQuanX() && !this.isLoon();
-            s ? this.log("", `??${this.name}, ´íÎó!`, t.stack) : this.log("", `??${this.name}, ´íÎó!`, t)
+            s ? this.log("", `??${this.name}, é”™è¯¯!`, t.stack) : this.log("", `??${this.name}, é”™è¯¯!`, t)
         }
 
         wait(t) {
@@ -725,7 +725,7 @@ function Env(t, e) {
         done(t = {}) {
             const e = (new Date).getTime(),
                 s = (e - this.startTime) / 1e3;
-            this.log("", `??${this.name}, ½áÊø! ?? ${s} Ãë`), this.log(), (this.isSurge() || this.isQuanX() || this.isLoon()) && $done(t)
+            this.log("", `??${this.name}, ç»“æŸ! ?? ${s} ç§’`), this.log(), (this.isSurge() || this.isQuanX() || this.isLoon()) && $done(t)
         }
     }(t, e)
 }   
