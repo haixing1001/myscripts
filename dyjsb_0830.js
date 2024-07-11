@@ -29,7 +29,7 @@ let envSplitor = ["@", "\n"]; //多账号分隔符
 let ck = msg = '';            //let ck,msg
 let versionupdate = "0";      //版本对比升级   0关闭  1开启
 let boxstoptims = "18";       //宝箱广告金币低于指定数量停止执行 18则是18金币
-let stoptims = "26";          //看广告超指定时间停止   填写注意：1代表1分钟，3代表3分钟
+let stoptims = "32";          //看广告超指定时间停止   填写注意：1代表1分钟，3代表3分钟
 //===============脚本版本=================//
 let scriptVersion = "v3.1";
 let update_tines = "2023-08-30";
