@@ -5,7 +5,7 @@
 #   - 名称：[servCK]   格式：[username#password]
 #   - 多账号处理方式：[暂不支持]
 # 定时设置: [0 0 9 ? * 1]
-# new Env("serv00保活")
+# new Env("serv00 WEB保活")
 import os
 import sys
 import requests
